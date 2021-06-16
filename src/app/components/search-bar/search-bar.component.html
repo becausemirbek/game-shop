@@ -1,6 +1,6 @@
 <div class="search-container">
-  <form class="search-form">
-    <span class="logo" routerLink="/">Logo</span>
+  <form class="search-form" #form="ngForm" (ngSubmit)="onSubmit(form)">
+    <span routerLink="/overview" class="logo">Logo</span>
     <input
       class="search-input"
       name="search"
@@ -9,4 +9,23 @@
     />
     <button class="search-button">Search</button>
   </form>
+
+  <div class="auth">
+    <ng-container
+      *ngIf="auth.isAuthenticated(); then loggedIn; else loggedOut">
+    </ng-container>
+    <ng-template #loggedIn>
+        <li routerLinkActive="active">
+          <p (click)="logout()">logout</p>
+        </li>
+    </ng-template>
+    <ng-template #loggedOut>
+        <li routerLinkActive="active">
+          <p routerLink="/login">Sign in</p>
+        </li>
+        <li routerLinkActive="active">
+          <p routerLink="/register">Sign up</p>
+        </li>
+    </ng-template>
+  </div>
 </div>

@@ -1,0 +1,67 @@
+<div class="container">
+  <form class="card" [formGroup]="form" (ngSubmit)="onSubmit()">
+    <div class="card-content">
+      <span class="card-title">Create account</span>
+      <div class="input-field">
+        <input 
+          formControlName="email"
+          type="email"
+          id="email"
+          [ngClass]="{'invalid' : form.get('email').invalid && form.get('email').touched}"
+        >
+        <label for="email">Email</label>
+        <span
+          class="helper-text red-text"
+          *ngIf="form.get('email').invalid && form.get('email').touched"
+        >
+          <span *ngIf="form.get('email').errors['required']">Email must not empty</span>
+          <span *ngIf="form.get('email').errors['email']">Type correct email please</span>
+        </span>
+      </div>
+      <div class="input-field">
+        <input 
+          formControlName="password"
+          type="password"
+          id="password"
+          [ngClass]="{'invalid' : form.get('password').invalid && form.get('password').touched}"
+          >
+        <label for="password">Password</label>
+        <span
+          class="helper-text red-text"
+          *ngIf="form.get('password').invalid && form.get('password').touched"
+        >
+          <span *ngIf="form.get('password').errors['required']">Password must not empty</span>
+          <span *ngIf="form.get('password').errors['minlength'] && form.get('password').errors['minlength']['requiredLength']">
+            Password must be greater {{form.get('password').errors['minlength']['requiredLength']}}
+            now {{form.get('password').errors['minlength']['actualLength']}}
+          </span>
+        </span>
+      </div>
+      <div class="input-field">
+        <input 
+          formControlName="fullName"
+          type="text"
+          id="fullName"
+          [ngClass]="{'invalid' : form.get('fullName').invalid && form.get('fullName').touched}"
+        >
+        <label for="email">User Name</label>
+        <span
+          class="helper-text red-text"
+          *ngIf="form.get('fullName').invalid && form.get('fullName').touched"
+        >
+          <span *ngIf="form.get('fullName').errors['required']">User Name must not empty</span>
+          <span *ngIf="form.get('fullName').errors['fullName']">Type correct User Name please</span>
+        </span>
+      </div>
+    </div>
+    <div class="card-action">
+      <button 
+        type="submit"  
+        class="modal-action btn waves-effect"
+        [disabled]="form.invalid || form.disabled"
+      >
+        Sign up
+      </button>
+    </div>
+  </form>
+</div>
